@@ -14,3 +14,20 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$(document).on('ready', function() {
+  $.ajax({
+    url: "/api/users.json"
+  })
+    .done(function( data ) {
+      $.each(data.users, function( index, user ) {
+        var user_element = '';
+        user_element += '<div id="user_' + user.user_id + '" class="user_entry">';
+        user_element += '<div class="status">' + user.status + '</div>';
+        user_element += '<div class="name">' + user.name + '</div>';
+        user_element += '</div>';
+
+        $( "#list" ).append( user_element );
+      });
+    });
+});
